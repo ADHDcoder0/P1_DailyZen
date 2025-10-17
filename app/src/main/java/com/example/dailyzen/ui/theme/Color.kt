@@ -2,10 +2,12 @@ package com.example.dailyzen.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val Lightgreen = Color(0xFF55e6c1)
+val ligherGreen = Color(0xFF9aecdb)
+val Green = Color(0xFF58b19f)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Darker = Color(0xFF182C61)
+val  Dark = Color(0xFF3B3B98)
+val Darkest = Color(0xFF2C3A47)
+
+val White = Color(0xFFeeeeee)
