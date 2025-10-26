@@ -1,5 +1,6 @@
 package com.example.dailyzen.navigation
 
+import android.R.attr.logo
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -7,8 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.dailyzen.Page.DailyPages
+import com.example.dailyzen.R
+import com.example.dailyzen.data.model.DailyList
 import com.example.dailyzen.data.model.habitList
-import com.example.dailyzen.ui.Components.Settings
+import com.example.dailyzen.ui.screens.Settings
 import com.example.dailyzen.ui.screens.Analytics
 import com.example.dailyzen.ui.screens.DashBoard
 import com.example.dailyzen.ui.screens.DetailsPage
@@ -22,40 +25,53 @@ fun SetupNavGraph(
     NavHost(
         navController= navController,
         startDestination= Screen.Home.route
-    ){
+    ) {
         composable(
-            route= Screen.Home.route
-        ){
+            route = Screen.Home.route
+        ) {
             DashBoard(navController)
         }
         composable(
-            route= Screen.Analytics.route
-        ){
+            route = Screen.Analytics.route
+        ) {
             Analytics()
         }
         composable(
-                route = Screen.Daily.route
-        ){
-            DailyPages(22,"Sun")
+            route = Screen.Daily.route
+        ) {
+            DailyPages(22, "Sun", navController, R.drawable.step)
         }
-        composable (Screen.Settings.route){
+        composable(Screen.Settings.route) {
             Settings()
         }
-        composable (Screen.Pomodoro.route){
+        composable(Screen.Pomodoro.route) {
             Pomodoro()
         }
-        composable(route = Screen.Details.route,
-            arguments = listOf(navArgument("habitId"){ type= NavType.IntType })
-       )
-        {backStackEntry->
+        composable(
+            route = Screen.Details.route,
+            arguments = listOf(navArgument("habitId") { type = NavType.IntType })
+        )
+        { backStackEntry ->
             val habitId = backStackEntry.arguments?.getInt("habitId")
             val habit = habitList.find { it.id == habitId }
 
-        if (habit != null) {
-            DetailsPage(title = habit.title, percent = habit.percent, Max = habit.Max)
+            if (habit != null) {
+                DetailsPage(title = habit.title, percent = habit.percent, Max = habit.Max)
+            }
+
+
         }
+        composable(
+            route = Screen.DetailsH.route,
+            arguments = listOf(navArgument("dailyId") { type = NavType.IntType })
+        )
+        { backStackEntry ->
+            val dailyId = backStackEntry.arguments?.getInt("dailyId")
+            val daily = DailyList.find { it.id == dailyId }
 
-
-    }
+            if (daily != null) {
+                DetailsPage(title = daily.title, percent = daily.percent, Max = daily.Max)
+            }
+        }
     }
 }

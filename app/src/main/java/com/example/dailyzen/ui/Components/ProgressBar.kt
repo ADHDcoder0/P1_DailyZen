@@ -7,9 +7,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,24 +23,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.dailyzen.ui.theme.Green
+import com.example.dailyzen.ui.theme.*
 
 
 @Composable
-fun ProgressBar(title:String,
-                percentage:Float,
-                Max:Int,
-                fontSize : TextUnit=28.sp,
-                radius :Dp= 50.dp,
-                color: Color = Green,
-                strokeWidth: Dp =8.dp,
-                animaDuration : Int =1000,
-                animaDelay: Int =0) {
+fun ProgressBar(
+    title: String,
+    percentage: Float,
+    Max: Int,
+    radius: Dp = 50.dp,
+    color: Color = OnBackground,
+    strokeWidth: Dp = 8.dp,
+    animaDuration: Int = 1000,
+    animaDelay: Int = 0
+) {
     var aniPlay by remember(title) {
         mutableStateOf(false)
     }
@@ -53,12 +54,13 @@ fun ProgressBar(title:String,
     LaunchedEffect(true) {
         aniPlay = true
     }
-    Column(modifier = Modifier
-        .fillMaxWidth(.5f)
-        .padding(6.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween) {
+    Column(
+        modifier = Modifier
 
+            .padding(6.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
 
 
         Box(
@@ -67,11 +69,13 @@ fun ProgressBar(title:String,
         ) {
 
             Canvas(
-                modifier = Modifier.size(radius * 2f)
+                modifier = Modifier
+                    .size(radius * 2f)
                     .padding(10.dp)
+                    .aspectRatio(1f)
             ) {
                 drawArc(
-                    color = color,
+                    color = if (percentage < 0.25f) SoftRed else if (percentage < 0.5f && percentage >= 0.25f) SoftOrange else if (percentage >= 0.5 && percentage < 0.75f) SoftYellow else SoftGreen,
                     -90f,
                     sweepAngle = 360 * curPercentage.value,
                     useCenter = false,
@@ -79,17 +83,25 @@ fun ProgressBar(title:String,
                 )
             }
             Text(
-                text = (curPercentage.value * Max).toInt().toString(),
-                modifier = Modifier.clickable {
-                    if (aniPlay)
-                        aniPlay = false
-                    // Re-trigger recomposition + animation
-                    else (!aniPlay)
-                    aniPlay = true
-                },
-                fontSize = fontSize,
-                fontWeight = FontWeight.Bold
+                text = (curPercentage.value * Max).toInt().toString(), color = OnBackground,
+                modifier = Modifier
+                    .clickable {
+                        if (aniPlay)
+                            aniPlay = false
+                        // Re-trigger recomposition + animation
+                        else (!aniPlay)
+                        aniPlay = true
+                    }
+                    .padding(top = 5.5.dp),
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    ProgressBar("Daily Task", 0.8f, 160)
 }
