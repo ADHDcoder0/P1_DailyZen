@@ -31,13 +31,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.dailyzen.Page.background
 import com.example.dailyzen.data.model.AgileFont
+
+import com.example.dailyzen.ui.theme.Background
 import com.example.dailyzen.ui.theme.Green
 import com.example.dailyzen.ui.theme.Lightgreen
+import com.example.dailyzen.ui.theme.OnBackground
+import com.example.dailyzen.ui.theme.OnPrimary
+import com.example.dailyzen.ui.theme.Surface
 import com.example.dailyzen.ui.theme.White
+import com.example.dailyzen.ui.theme.ligherGreen
 import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 
 @Composable
@@ -47,7 +56,7 @@ fun Timer(
 //    inactiveBarColor: Color,
 //    activeBarColor:Color,
 //    initialValue:Float =0f
-    ) {
+) {
     var totalTime by remember { mutableStateOf(1500000L) }
     var remainingTime by remember {
         mutableStateOf(totalTime)
@@ -65,32 +74,50 @@ fun Timer(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Lightgreen).padding(15.dp),
+            .background(Background)
+            .padding(15.dp),
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = formateTime(remainingTime),
             fontFamily = AgileFont,
+            color = OnPrimary,
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(9.dp)
         )
         Spacer(modifier = Modifier.height(18.dp))
 
-        Button(onClick = {
-            if (isRunning) {
-                isRunning = false
-            } else {
-                startTime = System.currentTimeMillis()
-                isRunning = true
-                keyBoardController?.hide()
-            }
-        }, colors = ButtonDefaults.buttonColors(
-            containerColor = Green
-        ),modifier = Modifier.height(50.dp).width(140.dp).padding(4.dp).clip(RoundedCornerShape(35.dp)).background(Green).border(
-            shape = RoundedCornerShape(35.dp),
-            width = 2.dp,
-            color = White,)) {
-            Text(text = if (isRunning) "Pause" else "Start", color = Color.White,fontFamily = AgileFont,)
+        Button(
+            onClick = {
+                if (isRunning) {
+                    isRunning = false
+                } else {
+                    startTime = System.currentTimeMillis()
+                    isRunning = true
+                    keyBoardController?.hide()
+                }
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = OnBackground
+            ),
+            modifier = Modifier
+                .height(50.dp)
+                .width(140.dp)
+                .padding(4.dp)
+                .clip(RoundedCornerShape(35.dp))
+                .background(OnPrimary, shape = RoundedCornerShape(35.dp))
+//                .border(
+//                    shape = RoundedCornerShape(35.dp),
+//                    width = 2.dp,
+//                    color = Color.Black
+//                )
+                .clip(RoundedCornerShape(35.dp))
+        ) {
+            Text(
+                text = if (isRunning) "Pause" else "Start",
+                color = Color.Black,
+                style= MaterialTheme.typography.displayMedium, textAlign = TextAlign.Center,
+            )
         }
         Spacer(modifier = Modifier.height(18.dp))
 
@@ -99,58 +126,100 @@ fun Timer(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = {
-                totalTime = 1500000
-                remainingTime = totalTime
-                isRunning = false
-            },colors = ButtonDefaults.buttonColors(
-                containerColor = Green
-            ),modifier = Modifier.weight(1f).padding(4.dp).clip(RoundedCornerShape(18.dp)).background(Green).border(
-                shape = RoundedCornerShape(18.dp),
-                width = 2.dp,
-                color = White,)) {
-                Text(text = "25", color = Color.White,fontFamily = AgileFont,)
+            Button(
+                onClick = {
+                    totalTime = 1500000
+                    remainingTime = totalTime
+                    isRunning = false
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = OnBackground
+                ),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(18.dp))
+
+//                    .border(
+//                        shape = RoundedCornerShape(18.dp),
+//                        width = 2.dp,
+//                        color = Color.White
+//                    )
+            ) {
+                Text(text = "25", color = Color.Black,  style= MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
             }
-            Button(onClick = {
-                totalTime = 2400000
-                remainingTime = totalTime
-                isRunning = false
-            },colors = ButtonDefaults.buttonColors(
-                containerColor = Green
-            ), modifier = Modifier.weight(1f).padding(4.dp).clip(RoundedCornerShape(18.dp)).background(Green).border(
-                shape = RoundedCornerShape(18.dp),
-                width = 2.dp,
-                color = White,)){
-                Text(text = "40", color = Color.White,fontFamily = AgileFont,)
+            Button(
+                onClick = {
+                    totalTime = 2400000
+                    remainingTime = totalTime
+                    isRunning = false
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = OnBackground
+                ),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(18.dp))
+
+//                    .border(
+//                        shape = RoundedCornerShape(18.dp),
+//                        width = 2.dp,
+//                        color = Color.White
+//                    )
+            ) {
+                Text(text = "40", color = Color.Black,  style= MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
             }
-            Button(onClick = {
-                totalTime = 3300000
-                remainingTime = totalTime
-                isRunning = false
-            }, colors = ButtonDefaults.buttonColors(
-                containerColor = Green
-            ),modifier = Modifier.weight(1f).padding(4.dp).clip(RoundedCornerShape(18.dp)).background(Green).border(
-                shape = RoundedCornerShape(18.dp),
-                width = 2.dp,
-                color = White,)) {
-                Text(text = "55", color = Color.White,fontFamily = AgileFont,)
+            Button(
+                onClick = {
+                    totalTime = 3300000
+                    remainingTime = totalTime
+                    isRunning = false
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = OnBackground
+                ),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(18.dp))
+
+//                    .border(
+//                        shape = RoundedCornerShape(18.dp),
+//                        width = 2.dp,
+//                        color = Color.White
+//                    )
+            ) {
+                Text(text = "55", color = Color.Black, style= MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
             }
-            Button(onClick = {
-                totalTime = 9990000
-                remainingTime = totalTime
-                isRunning = false
-            }, colors = ButtonDefaults.buttonColors(
-                containerColor = Green
-            ), modifier = Modifier.weight(1f).padding(4.dp).clip(RoundedCornerShape(18.dp)).background(Green).border(
-                shape = RoundedCornerShape(18.dp),
-                width = 2.dp,
-                color = White,)) {
-                Text(text = "+", color = Color.White,fontFamily = AgileFont,)
+            Button(
+                onClick = {
+                    var time = Random.nextInt(15, 100)
+                    totalTime = (time*100000).toLong()
+                    remainingTime = totalTime
+                    isRunning = false
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = OnBackground
+                ),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(18.dp))
+
+//                    .border(
+//                        shape = RoundedCornerShape(18.dp),
+//                        width = 2.dp,
+//                        color = Color.White
+//                    )
+            ) {
+                Text(text = "*+*", color = Color.Black,  style= MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
             }
 
         }
 
     }
+
     LaunchedEffect(isRunning) {
         if (isRunning) {
             startTime = System.currentTimeMillis() // start fresh
@@ -160,14 +229,14 @@ fun Timer(
                 remainingTime = (remainingTime - 1000).coerceAtLeast(0L)
             }
         }
-}
+    }
 }
 
 
-fun formateTime(timeMi:Long): String {
+fun formateTime(timeMi: Long): String {
     val hours = TimeUnit.MILLISECONDS.toHours(timeMi)
-    val min = TimeUnit.MILLISECONDS.toMinutes(timeMi)%60
-    val sec = TimeUnit.MILLISECONDS.toSeconds(timeMi)%60
-    return String.format("%02d:%02d:%02d",hours,min,sec)
+    val min = TimeUnit.MILLISECONDS.toMinutes(timeMi) % 60
+    val sec = TimeUnit.MILLISECONDS.toSeconds(timeMi) % 60
+    return String.format("%02d:%02d:%02d", hours, min, sec)
 
 }

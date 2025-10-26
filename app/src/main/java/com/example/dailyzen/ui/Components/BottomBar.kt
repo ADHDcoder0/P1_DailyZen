@@ -1,14 +1,18 @@
 package com.example.dailyzen.ui.Components
 
+import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.dailyzen.navigation.Screen
-import com.example.dailyzen.ui.theme.Green
+import com.example.dailyzen.ui.theme.*
 import com.example.dailyzen.ui.theme.White
+
 
 @Composable
 fun BottomBar(navController: NavController) {
@@ -22,7 +26,17 @@ fun BottomBar(navController: NavController) {
     )
 
     NavigationBar(
-        containerColor = Green,
+        modifier = Modifier.background(
+            brush = Brush.run {
+                verticalGradient(
+                    colors = listOf(
+
+                        Surface, Background,
+                    )
+                )
+            }
+        ),
+        containerColor = Color.Transparent,
         contentColor = Color.White,
         tonalElevation = 20.dp
     ) {
@@ -30,8 +44,8 @@ fun BottomBar(navController: NavController) {
         val currentRoute = navBackStackEntry.value?.destination?.route
         items.forEach { screen ->
             NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = screen.title) },
-                label = { Text(screen.title) },
+                icon = { Icon(screen.icon, contentDescription = screen.title, tint = White) },
+                label = { Text(screen.title, color = White, style = MaterialTheme.typography.labelSmall) },
                 selected = currentRoute == screen.route,
                 onClick = {
                     if (currentRoute != screen.route) {
@@ -44,4 +58,5 @@ fun BottomBar(navController: NavController) {
             )
         }
     }
+
 }
