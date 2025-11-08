@@ -1,6 +1,6 @@
 package com.example.dailyzen.ui.testing
 
-import com.example.dailyzen.ui.Components.ProgressBar
+import com.example.dailyzen.ui.components.ProgressBar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

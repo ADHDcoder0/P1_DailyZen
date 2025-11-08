@@ -2,6 +2,7 @@ package com.example.dailyzen.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Analytics
+import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Details
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LooksTwo
@@ -28,7 +29,7 @@ sealed class Screen(
 
     object Daily : Screen("Daily", "Daily", Icons.Filled.Today)
 
-    object Settings : Screen("Setting", "Setting", Icons.Filled.Settings)
+    object Settings : Screen("Setting", "Settings", Icons.Filled.Settings)
     object Pomodoro : Screen("pomodoro", "Pomodoro", Icons.Filled.Timer)
     object Details : Screen("Details/{habitId}", "Details", Icons.Filled.Details) {
         fun passId(habitId: Int): String {
@@ -36,7 +37,12 @@ sealed class Screen(
         }
 
     }
-
+    object Journal :Screen("Journal", "Journal", Icons.Filled.Book)
+    object JournalDaily : Screen("journal/{journalId}", "journal", Icons.Filled.Book) {
+        fun passId(journalId: Int): String {
+            return "journal/$journalId"
+        }
+    }
     object DetailsH : Screen("DetailsH/{dailyId}", "DetailsH", Icons.Filled.Details) {
         fun passId(dailyId: Int): String {
             return "DetailsH/$dailyId"

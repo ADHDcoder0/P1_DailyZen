@@ -1,4 +1,4 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -62,5 +62,5 @@ fun Graph(data1: List<Float>,data: List<Float>) {
 @Preview(showBackground = true)
 @Composable
 fun LineChartPreview(){
-    Graph(websiteVisits,websiteVisits2)
+
 }

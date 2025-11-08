@@ -18,7 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dailyzen.navigation.SetupNavGraph
-import com.example.dailyzen.ui.Components.BottomBar
+import com.example.dailyzen.ui.components.BottomBar
+import com.example.dailyzen.ui.components.FAB
 
 import com.example.dailyzen.ui.theme.*
 
@@ -37,6 +38,8 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         BottomBar(navController)
                     }
+                    ,
+                    floatingActionButton = {FAB(navController)}
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         SetupNavGraph(navController = navController)

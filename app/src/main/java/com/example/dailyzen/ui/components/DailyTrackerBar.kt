@@ -1,10 +1,11 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
-import android.R.attr.onClick
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,11 +21,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.dailyzen.R
+import com.example.dailyzen.data.model.AgileFont
 import com.example.dailyzen.ui.testing.Vextor
 import com.example.dailyzen.ui.theme.Background
 import com.example.dailyzen.ui.theme.DeepAmber
@@ -34,13 +39,35 @@ import com.example.dailyzen.ui.theme.OnPrimary
 import com.example.dailyzen.ui.theme.Surface
 
 @Composable
-fun DailyTrackerBar(id: Int, title: String, percentage: Float, Max: Int, onClick: () -> Unit, logo: Int, dark: Color,
+fun DailyTrackerBar(
+    id: Int,
+    title: String,
+    percentage: Float,
+    Max: Int,
+    onClick: () -> Unit,
+    logo: Int,
+    dark: Color,
 
-                    medium:Color,
-                    light :Color) {
+    medium: Color,
+    light: Color
+) {
+    var current = when (title){
+            "Step"->(Max*percentage).toInt()
+        "Water"->Max*percentage/1000
+         else-> ((Max*percentage)/60).toInt().toFloat()+((Max*percentage)%60)/60
+
+        }
+    var updateMax=when (title){
+        "Step"->Max
+        "Water"->(Max.toFloat())/1000
+        else-> (Max.toFloat())/60
+
+
+    }
+
     Box(
         modifier = Modifier
-            .padding(bottom = 8.dp, start = 8.dp, end = 8.dp)
+            .padding(bottom = 6.dp, start = 6.dp, end = 6.dp)
             .fillMaxWidth()
             .height(100.dp)
             .clip(RoundedCornerShape(20.dp))
@@ -60,23 +87,34 @@ fun DailyTrackerBar(id: Int, title: String, percentage: Float, Max: Int, onClick
 
             .clickable { onClick() },
     ) {
-        Vextor(dark,medium,light )
+        Vextor(dark, medium, light)
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-               ,
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                title,
-                textAlign = TextAlign.Center,
-                color = OnPrimary,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(start=16.dp)
+            Column() {
+                Text(
+                    title,
+                    textAlign = TextAlign.Center,
+                    color = OnPrimary,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
 
-            )
-            ImageProgressBar(title, percentage, Max , logo  = painterResource(id = logo))
+                )
+                Text(
+                    "$current/$updateMax",
+                    textAlign = TextAlign.Center,
+                    color = OnPrimary,
+                    fontFamily = AgileFont,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(start = 16.dp)
+
+                )
+            }
+            ImageProgressBar(title, percentage, Max, logo = painterResource(id = logo))
         }
 
     }

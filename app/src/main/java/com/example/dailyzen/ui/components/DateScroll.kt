@@ -1,5 +1,6 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -27,14 +28,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.dailyzen.navigation.Screen
 import com.example.dailyzen.ui.theme.Background
 import com.example.dailyzen.ui.theme.Dark
 import com.example.dailyzen.ui.theme.OnPrimary
 import com.example.dailyzen.ui.theme.Surface
 import com.example.dailyzen.ui.theme.White
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
-fun DateScroll() {
+fun DateScroll(navController: NavController) {
     var selectedDate by remember { mutableStateOf(0) }
     val day = listOf<String>("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
@@ -70,6 +74,7 @@ fun DateScroll() {
                         Button(
                             onClick = {
                                 selectedDate=index
+                                navController.navigate(Screen.Daily.route)
                             },
                             modifier = Modifier
 
@@ -112,9 +117,9 @@ fun DateScroll() {
             }
         }
     }
-
-@Composable
-@Preview(showBackground = true)
-fun PrevDate(){
-    DateScroll()
-}
+//
+//@Composable
+//@Preview(showBackground = true)
+//fun PrevDate(){
+//    DateScroll()
+//}

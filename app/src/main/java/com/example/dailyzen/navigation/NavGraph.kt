@@ -6,25 +6,29 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.dailyzen.Page.DailyPages
 import com.example.dailyzen.R
 import com.example.dailyzen.data.model.DailyList
+import com.example.dailyzen.data.model.JournalList
 import com.example.dailyzen.data.model.habitList
+import com.example.dailyzen.ui.components.Journal
 import com.example.dailyzen.ui.screens.Settings
 import com.example.dailyzen.ui.screens.Analytics
 import com.example.dailyzen.ui.screens.DashBoard
 import com.example.dailyzen.ui.screens.DetailsPage
+import com.example.dailyzen.ui.screens.JournalPage
 import com.example.dailyzen.ui.screens.Pomodoro
 
 
 @Composable
 fun SetupNavGraph(
-    navController : NavHostController
-){
+    navController: NavHostController
+) {
     NavHost(
-        navController= navController,
-        startDestination= Screen.Home.route
+        navController = navController,
+        startDestination = Screen.Home.route
     ) {
         composable(
             route = Screen.Home.route
@@ -34,18 +38,16 @@ fun SetupNavGraph(
         composable(
             route = Screen.Analytics.route
         ) {
-            Analytics()
-        }
-        composable(
-            route = Screen.Daily.route
-        ) {
-            DailyPages(22, "Sun", navController, R.drawable.step)
+            Analytics(navController)
         }
         composable(Screen.Settings.route) {
             Settings()
         }
         composable(Screen.Pomodoro.route) {
             Pomodoro()
+        }
+        composable(Screen.Journal.route) {
+            JournalPage( navController = navController)
         }
         composable(
             route = Screen.Details.route,
@@ -57,6 +59,20 @@ fun SetupNavGraph(
 
             if (habit != null) {
                 DetailsPage(title = habit.title, percent = habit.percent, Max = habit.Max)
+            }
+
+
+        }
+        composable(
+            route = Screen.JournalDaily.route,
+            arguments = listOf(navArgument("journalId") { type = NavType.IntType })
+        )
+        { backStackEntry ->
+            val journalId = backStackEntry.arguments?.getInt("journalId")
+            val journal = JournalList.find { it.id == journalId }
+
+            if (journal != null) {
+                Journal(journal.date, journal.day, journal.month, journal.content, journal.title)
             }
 
 

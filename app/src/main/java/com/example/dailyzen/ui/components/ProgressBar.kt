@@ -1,4 +1,4 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

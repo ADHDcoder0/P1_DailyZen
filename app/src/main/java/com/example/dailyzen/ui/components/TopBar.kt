@@ -1,9 +1,11 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -37,6 +39,7 @@ fun TopBar(
                     )
                 ), shape = RectangleShape
             ),
+
         title = {
             Text(
                 title, style = MaterialTheme.typography.displayLarge,

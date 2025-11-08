@@ -34,7 +34,7 @@ val AppTypography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
         lineHeight = 26.sp,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.6.sp
     ),
 
 // 💬 Subheading / Label Text (e.g. "I am Feeling", "Make the day count!!")

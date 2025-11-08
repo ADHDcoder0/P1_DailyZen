@@ -1,4 +1,4 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -53,7 +53,8 @@ fun HabitBar(id: Int, title: String, percentage: Float, Max: Int, onClick: () ->
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+            ,
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
