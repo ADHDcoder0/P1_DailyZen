@@ -21,9 +21,9 @@ import com.example.dailyzen.ui.theme.MediumSlate
 
 public data class Daily(val id:Int,val title:String,val percent :Float,val Max:Int,@DrawableRes val logo: Int,val dark: Color, val medium:Color, val light:Color)
 val DailyList = listOf(
-    Daily(9,"Step", .4f, 67,R.drawable.step,DeepAmber , MediumAmber, LightAmber ),
-    Daily(10,"Water", .5f, 21,R.drawable.avatar,DeepCoral, MediumCoral, LightCoral),
-    Daily(11,"Sleep", .69f, 120,R.drawable.avatartwo,DeepSlate, MediumSlate, LightSlate),
-    Daily(12, "Screen", .12f, 33,R.drawable.fotordavatar,DeepBlue , MediumBlue, LightBlue),
+    Daily(9,"Step", .4f, 9000,R.drawable.step,DeepAmber , MediumAmber, LightAmber ),
+    Daily(10,"Water", .5f, 4000,R.drawable.avatar,DeepCoral, MediumCoral, LightCoral),
+    Daily(11,"Sleep", .4f, 420,R.drawable.avatartwo,DeepSlate, MediumSlate, LightSlate),
+    Daily(12, "Screen", .50f, 240,R.drawable.fotordavatar,DeepBlue , MediumBlue, LightBlue),
 
 )

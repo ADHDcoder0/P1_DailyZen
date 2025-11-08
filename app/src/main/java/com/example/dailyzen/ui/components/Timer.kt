@@ -1,4 +1,4 @@
-package com.example.dailyzen.Components
+package com.example.dailyzen.ui.components
 
 
 import androidx.compose.foundation.background

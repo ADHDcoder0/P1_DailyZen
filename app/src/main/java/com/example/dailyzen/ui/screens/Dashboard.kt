@@ -11,11 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.dailyzen.data.model.habitList
-import com.example.dailyzen.ui.Components.DateScroll
-import com.example.dailyzen.ui.Components.Greeting
-import com.example.dailyzen.ui.Components.HabitBar
-import com.example.dailyzen.ui.Components.MoodGrit
-import com.example.dailyzen.ui.Components.TopBar
+import com.example.dailyzen.ui.components.DateScroll
+import com.example.dailyzen.ui.components.Greeting
+import com.example.dailyzen.ui.components.HabitBar
+import com.example.dailyzen.ui.components.MoodGrit
+import com.example.dailyzen.ui.components.TopBar
 import com.example.dailyzen.navigation.Screen
 import com.example.dailyzen.ui.theme.Background
 import com.example.dailyzen.ui.theme.Green
@@ -29,8 +29,9 @@ fun DashBoard(navController: NavController){
             item{TopBar("DailyZen",Green)
                 Greeting("Kushagra")
             }
+
             item{
-                DateScroll()
+                DateScroll(navController=navController)
             MoodGrit(navController=navController)}
             items(habitList){
                 habit-> HabitBar(id=habit.id,

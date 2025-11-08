@@ -19,6 +19,7 @@ val Primary = Color(0x473B3B98)
 val OrignnalPrimary = Color(0xFFBB86FC)
 val Secondary = Color(0xFF03DAC6)
 val OnPrimary = Color(0xFFFFFFFF)
+
 val OnBackground = Color(0xFFE0E0E0)
 val Error = Color(0xFFCF6679)
 

@@ -23,8 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.dailyzen.ui.Components.Profile
-import com.example.dailyzen.ui.Components.TopBar
+import com.example.dailyzen.ui.components.Profile
+import com.example.dailyzen.ui.components.TopBar
 import com.example.dailyzen.ui.theme.Background
 import com.example.dailyzen.ui.theme.OnPrimary
 import com.example.dailyzen.ui.theme.Surface

@@ -1,4 +1,4 @@
-package com.example.dailyzen.ui.Components
+package com.example.dailyzen.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Color
@@ -19,7 +19,7 @@ fun BottomBar(navController: NavController) {
     val items = listOf(
         Screen.Home,
         Screen.Analytics,
-        Screen.Daily,
+        Screen.Journal,
         Screen.Pomodoro,
         Screen.Settings
 

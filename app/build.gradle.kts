@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-}
 
+}
 android {
     namespace = "com.example.dailyzen"
     compileSdk = 36
@@ -63,5 +63,8 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.navigation:navigation-compose:2.8.0")
+    implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
+
+
 
 }
